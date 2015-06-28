@@ -32,3 +32,5 @@ sdk_project "libsce_sleddebugger"
 
 	configuration { "Debug*" }
 		defines { "SCE_SLED_ASSERT_ENABLED=1" }
+		-- JC2MP addition
+		defines { "_HAS_ITERATOR_DEBUGGING=0" }

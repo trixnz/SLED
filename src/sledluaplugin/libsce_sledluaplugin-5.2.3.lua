@@ -49,6 +49,8 @@ sdk_project "libsce_sledluaplugin-5.2.3"
 	
 	configuration { "Debug*" }
 		defines { "SCE_SLED_ASSERT_ENABLED=1" }
+		-- JC2MP addition
+		defines { "_HAS_ITERATOR_DEBUGGING=0" }
 		
 	configuration { "Win*" }
 		linkoptions { "/ignore:4221" }

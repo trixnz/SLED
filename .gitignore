@@ -207,3 +207,5 @@ FakesAssemblies/
 # Output Dirs of SLED
 bin/*
 lib/*
+tmp/*
+premake5.exe
