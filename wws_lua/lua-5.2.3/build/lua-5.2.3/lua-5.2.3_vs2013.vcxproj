@@ -205,7 +205,7 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <PreprocessorDefinitions>_DEBUG;DEBUG;WWS_BUILD_DEBUG;WWS_ASSERTS_ENABLED=1;WWS_MINIMUM_LOG_LEVEL_COMPILE_TIME=kWwsLogDebug;WIN32;_WIN32;_WINDOWS;_MBCS;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;WWS_LUA_VER=523;SCE_LUA_VER=523;LUA_USE_APICHECK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;DEBUG;WWS_BUILD_DEBUG;WWS_ASSERTS_ENABLED=1;WWS_MINIMUM_LOG_LEVEL_COMPILE_TIME=kWwsLogDebug;WIN32;_WIN32;_WINDOWS;_MBCS;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_HAS_ITERATOR_DEBUGGING=0;WWS_LUA_VER=523;SCE_LUA_VER=523;LUA_USE_APICHECK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>

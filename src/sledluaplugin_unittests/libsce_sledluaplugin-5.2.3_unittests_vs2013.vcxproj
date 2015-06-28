@@ -213,7 +213,7 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <PreprocessorDefinitions>_DEBUG;DEBUG;WWS_BUILD_DEBUG;WWS_ASSERTS_ENABLED=1;WWS_MINIMUM_LOG_LEVEL_COMPILE_TIME=kWwsLogDebug;WIN32;_WIN32;_WINDOWS;_MBCS;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;SCE_LUA_VER=523;WWS_LUA_VER=523;UNITTEST_XML_NAME=libsce_sledluaplugin-5.2.3_unittests;UNITTEST_XML_SUITE=win32_static_dcrt_vc120_debug;UNITTEST_XML_NAME=libsce_sleddebugger_unittests;UNITTEST_XML_PATH=./bin/win32_static_dcrt_vc120_debug/test-reports;SCE_SLED_ASSERT_ENABLED=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;DEBUG;WWS_BUILD_DEBUG;WWS_ASSERTS_ENABLED=1;WWS_MINIMUM_LOG_LEVEL_COMPILE_TIME=kWwsLogDebug;WIN32;_WIN32;_WINDOWS;_MBCS;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_HAS_ITERATOR_DEBUGGING=0;SCE_LUA_VER=523;WWS_LUA_VER=523;UNITTEST_XML_NAME=libsce_sledluaplugin-5.2.3_unittests;UNITTEST_XML_SUITE=win32_static_dcrt_vc120_debug;UNITTEST_XML_NAME=libsce_sleddebugger_unittests;UNITTEST_XML_PATH=./bin/win32_static_dcrt_vc120_debug/test-reports;SCE_SLED_ASSERT_ENABLED=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..;..\..\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <Optimization>Disabled</Optimization>

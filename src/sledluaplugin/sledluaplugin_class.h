@@ -241,6 +241,8 @@ namespace sce { namespace Sled
 		int32_t lookUpTypeVal(lua_State *luaState, int iIndex, char *pValue, const int& iValueLen, bool bPop = true);
 		bool getStackIndexInfo(lua_State *luaState, int index, char *pName, int nameStrLen, int32_t *luaType);
 		void getTableValues(lua_State *luaState, const LuaVariable *pVar, LuaVariableScope::Enum what, int32_t iVarIndex, int32_t iTableIndex, int32_t iStackLevel);
+		// Added for JC2MP support with luabind
+		void getLuabindClassValues(lua_State* luaState, LuaVariable const* pVar, int32_t iInstanceIdx);
 		bool luaPushValue(lua_State *luaState, int32_t iType, const char *pszValue);
 		int32_t getGlobals(lua_State *luaState);
 		void sendGlobal(const LuaVariable *parent, const char *name, int32_t nameType, const char *value, int32_t valueType);

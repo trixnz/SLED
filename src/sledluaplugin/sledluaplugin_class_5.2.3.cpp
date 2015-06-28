@@ -1402,6 +1402,10 @@ namespace sce { namespace Sled
 		{
 			getTableValues(luaState, pVar, pVar->what, 0, -2, 0);
 		}
+		else if (iLuaType == LUA_TUSERDATA)
+		{
+			getLuabindClassValues(luaState, pVar, -1);
+		}
 		else
 		{
 			char szValue[SCMP::Sizes::kVarValueLen];
@@ -1446,6 +1450,10 @@ namespace sce { namespace Sled
 			if ((iLuaType == LUA_TTABLE) && !pVar->bFlag)
 			{
 				getTableValues(luaState, pVar, pVar->what, pVar->index, -2, pVar->level);
+			}
+			else if (iLuaType == LUA_TUSERDATA)
+			{
+				getLuabindClassValues(luaState, pVar, -1);
 			}
 			else
 			{
@@ -1499,6 +1507,10 @@ namespace sce { namespace Sled
 			if ((iLuaType == LUA_TTABLE) && !pVar->bFlag)
 			{
 				getTableValues(luaState, pVar, pVar->what, pVar->index, -2, pVar->level);
+			}
+			else if (iLuaType == LUA_TUSERDATA)
+			{
+				getLuabindClassValues(luaState, pVar, -1);
 			}
 			else
 			{
@@ -1555,6 +1567,10 @@ namespace sce { namespace Sled
 		if ((iLuaType == LUA_TTABLE) && !pVar->bFlag)
 		{
 			getTableValues(luaState, pVar, pVar->what, pVar->index, -2, pVar->level);
+		}
+		else if (iLuaType == LUA_TUSERDATA)
+		{
+			getLuabindClassValues(luaState, pVar, -1);
 		}
 		else
 		{
@@ -1795,6 +1811,7 @@ namespace sce { namespace Sled
 		const int valIndex = -1;	
 
 		::lua_pushnil(luaState);
+		
 		while (::lua_next(luaState, iTableIndex) != 0)
 		{		
 			if (getStackIndexInfo(luaState, keyIndex, szKey, SCMP::Sizes::kVarNameLen, &keyLuaType))
@@ -1838,6 +1855,17 @@ namespace sce { namespace Sled
 			// Pop the value (leaving original key alone)
 			::lua_pop(luaState, 1);
 		}
+	}
+
+	void LuaPlugin::getLuabindClassValues(lua_State* luaState, LuaVariable const* pVar, int32_t iInstanceIdx)
+	{
+		lua_getglobal(luaState, "sled_class_info");
+		lua_pushvalue(luaState, iInstanceIdx - 1);
+		lua_call(luaState, 1, 1);
+
+		getTableValues(luaState, pVar, pVar->what, 0, -2, 0);
+
+		lua_pop(luaState, 1);
 	}
 
 	bool LuaPlugin::luaPushValue(lua_State *luaState, int32_t iType, const char *pszValue)

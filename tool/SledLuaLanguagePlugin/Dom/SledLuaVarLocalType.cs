@@ -139,7 +139,7 @@ namespace Sce.Sled.Lua.Dom
         {
             info.Label = DisplayName;
             info.Properties = new[] { What, Value, SledLuaVarScopeTypeString.ToString(Scope) };
-            info.IsLeaf = (LuaType != LuaType.LUA_TTABLE);
+            info.IsLeaf = (LuaType != LuaType.LUA_TTABLE) && (LuaType != LuaType.LUA_TUSERDATA);
             info.ImageIndex = info.GetImageIndex(Atf.Resources.DataImage);
             info.Description =
                 Name + Resource.Space + Resource.Colon + Resource.Space +
