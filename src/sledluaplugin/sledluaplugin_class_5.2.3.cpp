@@ -1389,21 +1389,7 @@ namespace sce { namespace Sled
 		for (int i = 0; i < pVar->numKeyValues; i++)
 		{
 			lastName = pVar->hKeyValues[i].name;
-			
-			/*
-			luaPushValue(luaState, pVar->hKeyValues[i].type, pVar->hKeyValues[i].name);
-			// Retrieve the field value if we're looking at a table, otherwise
-			// we should definitely invoke the meta methods.
-			if (::lua_type(luaState, -2) == LUA_TTABLE)
-			{
-				LUA_PRE_RAWGET_CHECK(luaState, -1, -2);
-				::lua_rawget(luaState, -2);
-			}
-			else
-			{
-				::lua_gettable(luaState, -2);
-			}*/
-
+		
 			getObjectKeyValue(luaState, &pVar->hKeyValues[i]);
 			lua_replace(luaState, -2);
 		}
@@ -1452,9 +1438,9 @@ namespace sce { namespace Sled
 			for (int i = 0; i < pVar->numKeyValues; i++)
 			{
 				lastName = pVar->hKeyValues[i].name;
-				luaPushValue(luaState, pVar->hKeyValues[i].type, pVar->hKeyValues[i].name);
-				LUA_PRE_RAWGET_CHECK(luaState, -1, -2);
-				::lua_rawget(luaState, -2);
+
+				getObjectKeyValue(luaState, &pVar->hKeyValues[i]);
+				lua_replace(luaState, -2);
 			}
 
 			const int iLuaType = ::lua_type(luaState, -1);
@@ -1465,7 +1451,7 @@ namespace sce { namespace Sled
 			{
 				getTableValues(luaState, pVar, pVar->what, pVar->index, -2, pVar->level);
 			}
-			else if (iLuaType == LUA_TUSERDATA)
+			else if ((iLuaType == LUA_TUSERDATA) && !pVar->bFlag)
 			{
 				getLuabindClassValues(luaState, pVar, -1);
 			}
@@ -1509,9 +1495,9 @@ namespace sce { namespace Sled
 			for (int i = 0; i < pVar->numKeyValues; i++)
 			{
 				lastName = pVar->hKeyValues[i].name;
-				luaPushValue(luaState, pVar->hKeyValues[i].type, pVar->hKeyValues[i].name);
-				LUA_PRE_RAWGET_CHECK(luaState, -1, -2);
-				::lua_rawget(luaState, -2);
+
+				getObjectKeyValue(luaState, &pVar->hKeyValues[i]);
+				lua_replace(luaState, -2);
 			}
 
 			const int iLuaType = ::lua_type(luaState, -1);
@@ -1522,7 +1508,7 @@ namespace sce { namespace Sled
 			{
 				getTableValues(luaState, pVar, pVar->what, pVar->index, -2, pVar->level);
 			}
-			else if (iLuaType == LUA_TUSERDATA)
+			else if ((iLuaType == LUA_TUSERDATA) && !pVar->bFlag)
 			{
 				getLuabindClassValues(luaState, pVar, -1);
 			}
@@ -1568,10 +1554,9 @@ namespace sce { namespace Sled
 		for (int i = 0; i < pVar->numKeyValues; i++)
 		{
 			lastName = pVar->hKeyValues[i].name;
-			luaPushValue(luaState, pVar->hKeyValues[i].type, pVar->hKeyValues[i].name);
 
-			LUA_PRE_RAWGET_CHECK(luaState, -1, -2);
-			::lua_rawget(luaState, -2);
+			getObjectKeyValue(luaState, &pVar->hKeyValues[i]);
+			lua_replace(luaState, -2);
 		}
 
 		const int iLuaType = ::lua_type(luaState, -1);
@@ -1582,7 +1567,7 @@ namespace sce { namespace Sled
 		{
 			getTableValues(luaState, pVar, pVar->what, pVar->index, -2, pVar->level);
 		}
-		else if (iLuaType == LUA_TUSERDATA)
+		else if ((iLuaType == LUA_TUSERDATA) && !pVar->bFlag)
 		{
 			getLuabindClassValues(luaState, pVar, -1);
 		}
@@ -1877,7 +1862,7 @@ namespace sce { namespace Sled
 		lua_pushvalue(luaState, iInstanceIdx - 1);
 		lua_call(luaState, 1, 1);
 
-		getTableValues(luaState, pVar, pVar->what, 0, -2, 0);
+		getTableValues(luaState, pVar, pVar->what, pVar->index, -2, pVar->level);
 
 		lua_pop(luaState, 1);
 	}
