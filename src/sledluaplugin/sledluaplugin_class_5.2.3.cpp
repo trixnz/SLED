@@ -1390,8 +1390,18 @@ namespace sce { namespace Sled
 		{
 			lastName = pVar->hKeyValues[i].name;
 			luaPushValue(luaState, pVar->hKeyValues[i].type, pVar->hKeyValues[i].name);
-			LUA_PRE_RAWGET_CHECK(luaState, -1, -2);
-			::lua_rawget(luaState, -2);
+			
+			// Retrieve the field value if we're looking at a table, otherwise
+			// we should definitely invoke the meta methods.
+			if (::lua_type(luaState, -2) == LUA_TTABLE)
+			{
+				LUA_PRE_RAWGET_CHECK(luaState, -1, -2);
+				::lua_rawget(luaState, -2);
+			}
+			else
+			{
+				::lua_gettable(luaState, -2);
+			}
 		}
 
 		const int iLuaType = ::lua_type(luaState, -1);
@@ -1402,7 +1412,7 @@ namespace sce { namespace Sled
 		{
 			getTableValues(luaState, pVar, pVar->what, 0, -2, 0);
 		}
-		else if (iLuaType == LUA_TUSERDATA)
+		else if ((iLuaType == LUA_TUSERDATA) && !pVar->bFlag)
 		{
 			getLuabindClassValues(luaState, pVar, -1);
 		}
