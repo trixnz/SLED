@@ -1389,8 +1389,9 @@ namespace sce { namespace Sled
 		for (int i = 0; i < pVar->numKeyValues; i++)
 		{
 			lastName = pVar->hKeyValues[i].name;
-			luaPushValue(luaState, pVar->hKeyValues[i].type, pVar->hKeyValues[i].name);
 			
+			/*
+			luaPushValue(luaState, pVar->hKeyValues[i].type, pVar->hKeyValues[i].name);
 			// Retrieve the field value if we're looking at a table, otherwise
 			// we should definitely invoke the meta methods.
 			if (::lua_type(luaState, -2) == LUA_TTABLE)
@@ -1401,7 +1402,10 @@ namespace sce { namespace Sled
 			else
 			{
 				::lua_gettable(luaState, -2);
-			}
+			}*/
+
+			getObjectKeyValue(luaState, &pVar->hKeyValues[i]);
+			lua_replace(luaState, -2);
 		}
 
 		const int iLuaType = ::lua_type(luaState, -1);
@@ -1876,6 +1880,14 @@ namespace sce { namespace Sled
 		getTableValues(luaState, pVar, pVar->what, 0, -2, 0);
 
 		lua_pop(luaState, 1);
+	}
+
+	void LuaPlugin::getObjectKeyValue(lua_State* luaState, LuaVariableKeyValue const* key)
+	{
+		lua_getglobal(luaState, "sled_get_object_value");
+		lua_pushvalue(luaState, -2);
+		luaPushValue(luaState, key->type, key->name);
+		lua_call(luaState, 2, 1);
 	}
 
 	bool LuaPlugin::luaPushValue(lua_State *luaState, int32_t iType, const char *pszValue)

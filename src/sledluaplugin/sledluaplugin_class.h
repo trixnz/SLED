@@ -243,6 +243,10 @@ namespace sce { namespace Sled
 		void getTableValues(lua_State *luaState, const LuaVariable *pVar, LuaVariableScope::Enum what, int32_t iVarIndex, int32_t iTableIndex, int32_t iStackLevel);
 		// Added for JC2MP support with luabind
 		void getLuabindClassValues(lua_State* luaState, LuaVariable const* pVar, int32_t iInstanceIdx);
+		// Given an object and key on the stack, get the object associated to it.
+		// Eg. object[key], object.__index(key), WNO:GetValue(key).
+		void getObjectKeyValue(lua_State* luaState, struct LuaVariableKeyValue const* key);
+		// End JC2MP additions
 		bool luaPushValue(lua_State *luaState, int32_t iType, const char *pszValue);
 		int32_t getGlobals(lua_State *luaState);
 		void sendGlobal(const LuaVariable *parent, const char *name, int32_t nameType, const char *value, int32_t valueType);
