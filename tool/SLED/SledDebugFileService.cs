@@ -259,7 +259,8 @@ namespace Sce.Sled
             if (m_sd != e.Document)
                 return;
 
-            HandleEditAndContinue(m_sd);
+            // JC2MP doesn't support this, so why show the window? :^)
+            // HandleEditAndContinue(m_sd);
 
             // Reset
             m_sd = null;
